@@ -1,0 +1,60 @@
+import { Link } from "react-router-dom";
+import { Building2, ArrowRight, ShieldCheck, ClipboardList, BellRing, Wrench, Users, CheckCircle2, Smartphone, LayoutDashboard } from "lucide-react";
+
+const features = [
+  { icon: ClipboardList, title: "Complaint Management", text: "Residents can raise concerns and follow progress from submission to resolution." },
+  { icon: BellRing, title: "Community Alerts", text: "Keep residents informed about important updates and urgent society notices." },
+  { icon: Wrench, title: "Asset Tracking", text: "Keep a clear view of shared facilities and maintenance service history." },
+  { icon: Users, title: "Role-based Access", text: "Separate workspaces for residents, staff, and administrators." },
+];
+
+export default function Home() {
+  return <div className="min-h-screen overflow-hidden bg-white text-slate-900">
+    <header className="relative z-10 border-b border-slate-100 bg-white/90">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 sm:px-8">
+        <Link to="/" className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-xl bg-blue-600 text-white"><Building2 size={22}/></span><span className="text-xl font-extrabold tracking-tight">SocietyFix</span></Link>
+        <div className="flex items-center gap-3"><Link to="/login" className="rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-100">Log in</Link><Link to="/register" className="rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-700">Create account</Link></div>
+      </nav>
+    </header>
+
+    <main>
+      <section className="relative isolate">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-blue-50 via-white to-cyan-50"/><div className="absolute -right-24 top-8 -z-10 h-80 w-80 rounded-full bg-blue-200/40 blur-3xl"/>
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-8 sm:py-24 lg:grid-cols-2 lg:py-28">
+          <div><div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white px-3.5 py-2 text-xs font-semibold text-blue-700 shadow-sm"><ShieldCheck size={15}/> A simpler way to manage your society</div>
+            <h1 className="max-w-2xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl lg:text-6xl">Your society, <span className="text-blue-600">running smoothly.</span></h1>
+            <p className="mt-6 max-w-xl text-base leading-8 text-slate-600 sm:text-lg">A central place for residents, staff, and administrators to manage complaints, share important updates, and keep community operations organised.</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row"><Link to="/register" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:-translate-y-0.5 hover:bg-blue-700">Get started <ArrowRight size={18}/></Link><Link to="/login" className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-6 py-3.5 font-semibold text-slate-700 hover:border-blue-200 hover:text-blue-700">Sign in to your portal</Link></div>
+            <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-sm text-slate-600"><span className="inline-flex items-center gap-2"><CheckCircle2 size={16} className="text-emerald-600"/>Easy complaint tracking</span><span className="inline-flex items-center gap-2"><CheckCircle2 size={16} className="text-emerald-600"/>Role-based dashboards</span></div>
+          </div>
+          <div className="relative mx-auto w-full max-w-xl"><div className="absolute -inset-4 rounded-[2rem] bg-blue-200/40 blur-2xl"/><div className="relative rounded-3xl border border-slate-200 bg-white p-5 shadow-2xl shadow-blue-900/10 sm:p-7">
+            <div className="flex items-center justify-between border-b border-slate-100 pb-5"><div className="flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-xl bg-blue-600 text-white"><LayoutDashboard size={22}/></span><div><p className="font-bold">Community overview</p><p className="mt-0.5 text-xs text-slate-500">A clear view of what's happening</p></div></div><span className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">Organised</span></div>
+            <div className="mt-5 grid grid-cols-2 gap-3"><div className="rounded-2xl bg-blue-50 p-4"><p className="text-sm text-slate-500">Complaints</p><p className="mt-2 text-3xl font-extrabold text-slate-900">Track</p><p className="mt-1 text-xs text-slate-500">From report to resolution</p></div><div className="rounded-2xl bg-cyan-50 p-4"><p className="text-sm text-slate-500">Community updates</p><p className="mt-2 text-3xl font-extrabold text-slate-900">Share</p><p className="mt-1 text-xs text-slate-500">Keep everyone informed</p></div></div>
+            <div className="mt-4 rounded-2xl border border-slate-100 p-4"><div className="mb-4 flex items-center justify-between"><p className="text-sm font-bold">How it works</p><Smartphone size={18} className="text-slate-400"/></div><div className="space-y-4">{[["01","Resident raises a complaint","Share details of an issue"],["02","Staff reviews the request","Work is tracked in one place"],["03","Resident checks progress","See status updates in the portal"]].map(([n,title,desc])=><div className="flex items-start gap-3" key={n}><span className="grid h-8 w-8 shrink-0 place-items-center rounded-lg bg-slate-100 text-xs font-bold text-slate-700">{n}</span><div><p className="text-sm font-semibold">{title}</p><p className="mt-1 text-xs text-slate-500">{desc}</p></div></div>)}</div></div>
+            <p className="mt-4 text-center text-xs text-slate-400">Illustrative preview of the SocietyFix experience</p>
+          </div></div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20"><div className="mx-auto max-w-2xl text-center"><p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">What you can do</p><h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">The essentials for a better-run community</h2><p className="mt-4 leading-7 text-slate-600">Bring day-to-day society communication and operations into a more organised workflow.</p></div>
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{features.map(({icon:Icon,title,text})=><article key={title} className="rounded-2xl border border-slate-200 bg-white p-6 transition hover:-translate-y-1 hover:border-blue-200 hover:shadow-lg hover:shadow-slate-200/50"><span className="grid h-12 w-12 place-items-center rounded-xl bg-blue-50 text-blue-600"><Icon size={23}/></span><h3 className="mt-5 text-lg font-bold">{title}</h3><p className="mt-2 text-sm leading-6 text-slate-600">{text}</p></article>)}</div>
+      </section>
+
+      <section className="border-y border-slate-100 bg-slate-50/70">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-2 lg:items-center">
+          <div><p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">A clearer process</p><h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">From a reported issue to a visible update</h2><p className="mt-5 leading-7 text-slate-600">When residents know where to report a problem and can see its status, everyday maintenance becomes easier to follow. SocietyFix is designed to keep the complaint details and status in one organised place instead of scattering updates across separate messages.</p><p className="mt-4 leading-7 text-slate-600">The current frontend demo supports creating complaints and viewing their status in the browser. Features such as live notifications, photo uploads, and shared multi-device data need a backend integration.</p></div>
+          <div className="space-y-4">{[["01","Describe the issue","Add a clear title, category, priority and description."],["02","Keep the request organised","Each request receives an ID and a status so it can be found again."],["03","Review progress","Residents can search their requests while staff and admin demo views can review the shared browser data."]].map(([n,title,desc])=><div key={n} className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5"><span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-blue-50 text-sm font-extrabold text-blue-700">{n}</span><div><h3 className="font-bold">{title}</h3><p className="mt-1 text-sm leading-6 text-slate-500">{desc}</p></div></div>)}</div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 sm:py-20"><div className="mx-auto max-w-2xl text-center"><p className="text-sm font-bold uppercase tracking-[0.18em] text-blue-600">Built around your role</p><h2 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl">A focused workspace for every team</h2><p className="mt-4 leading-7 text-slate-600">Different users need different views. SocietyFix separates the resident experience from the staff and administrator workflows.</p></div>
+        <div className="mt-10 grid gap-5 md:grid-cols-3">{[{title:"Residents",text:"Create a complaint, search submitted requests, and check the latest status from a personal dashboard."},{title:"Staff",text:"Review the current request queue and see which issues need attention."},{title:"Administrators",text:"Review submitted complaints, update statuses, and access the sample staff directory."}].map((x,i)=><article key={x.title} className="rounded-2xl border border-slate-200 p-6"><span className="grid h-11 w-11 place-items-center rounded-xl bg-slate-950 text-sm font-bold text-white">0{i+1}</span><h3 className="mt-5 text-lg font-bold">{x.title}</h3><p className="mt-2 text-sm leading-7 text-slate-600">{x.text}</p></article>)}</div>
+      </section>
+
+      <section className="bg-blue-50/70"><div className="mx-auto grid max-w-7xl gap-8 px-5 py-14 sm:px-8 md:grid-cols-3"><div><h3 className="font-bold text-slate-900">Less confusion</h3><p className="mt-2 text-sm leading-6 text-slate-600">Keep the request title, category, priority and status together for easier follow-up.</p></div><div><h3 className="font-bold text-slate-900">More visibility</h3><p className="mt-2 text-sm leading-6 text-slate-600">Use search and filters to locate requests without scrolling through every item.</p></div><div><h3 className="font-bold text-slate-900">A practical starting point</h3><p className="mt-2 text-sm leading-6 text-slate-600">Explore the user interface now; connect a backend and database when you are ready to deploy.</p></div></div></section>
+
+      <section className="mx-auto max-w-7xl px-5 pb-16 sm:px-8 sm:pb-20"><div className="flex flex-col items-start justify-between gap-6 rounded-3xl bg-slate-950 px-7 py-10 text-white sm:px-10 lg:flex-row lg:items-center"><div><h2 className="text-2xl font-extrabold sm:text-3xl">Make society management simpler.</h2><p className="mt-3 max-w-2xl leading-7 text-slate-300">Create an account to get started, or log in to continue to your portal.</p></div><div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row"><Link to="/register" className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-500 px-5 py-3 font-semibold text-white hover:bg-blue-400">Create account <ArrowRight size={17}/></Link><Link to="/login" className="inline-flex items-center justify-center rounded-xl border border-white/20 px-5 py-3 font-semibold text-white hover:bg-white/10">Log in</Link></div></div></section>
+    </main>
+    <footer className="border-t border-slate-100"><div className="mx-auto flex max-w-7xl flex-col gap-3 px-5 py-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-8"><span className="font-bold text-slate-700">SocietyFix</span><span>Society operations, organised in one place.</span><span>Frontend demo · No backend connected</span></div></footer>
+  </div>;
+}

@@ -1,0 +1,19 @@
+import { useEffect, useMemo, useState } from "react";
+import { ClipboardList, Clock3, CheckCircle2, AlertTriangle, ArrowRight, Wrench, CalendarDays } from "lucide-react";
+import { Link } from "react-router-dom";
+import { getComplaints } from "../../services/api";
+import StatusBadge from "../../components/StatusBadge";
+import { useAuth } from "../../context/AuthContext";
+
+export default function StaffDashboard() {
+ const { user } = useAuth();
+ const [complaints,setComplaints]=useState(getComplaints);
+ useEffect(()=>{const refresh=()=>setComplaints(getComplaints());window.addEventListener("societycare:complaints-updated",refresh);window.addEventListener("storage",refresh);return()=>{window.removeEventListener("societycare:complaints-updated",refresh);window.removeEventListener("storage",refresh);};},[]);
+ const assigned=useMemo(()=>complaints.filter(c=>c.assignedTo===user?.email),[complaints,user?.email]);
+ const items=useMemo(()=>assigned.filter(c=>!["Resolved","Closed"].includes(c.status)),[assigned]);
+ const stats=[{t:"Open requests",v:assigned.filter(c=>c.status==="Open").length,i:ClipboardList,c:"text-blue-600 bg-blue-50"},{t:"In progress",v:assigned.filter(c=>c.status==="In progress"||c.status==="Assigned").length,i:Clock3,c:"text-amber-600 bg-amber-50"},{t:"Resolved",v:assigned.filter(c=>["Resolved","Closed"].includes(c.status)).length,i:CheckCircle2,c:"text-emerald-600 bg-emerald-50"},{t:"High priority",v:assigned.filter(c=>c.priority==="High"&&!["Resolved","Closed"].includes(c.status)).length,i:AlertTriangle,c:"text-rose-600 bg-rose-50"}];
+ return <div className="space-y-6"><section className="rounded-2xl bg-gradient-to-r from-blue-700 to-blue-500 p-6 text-white shadow-lg shadow-blue-600/15 md:p-8"><div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-xs font-medium"><CalendarDays size={14}/>{new Date().toLocaleDateString("en-IN",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}</div><h2 className="text-2xl font-bold md:text-3xl">Good day, {user?.name?.split(" ")[0]||"there"} 👋</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-blue-100">Welcome back. Here are the complaints assigned to you and the work that still needs attention.</p></section>
+ <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">{stats.map(s=><div key={s.t} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft"><div className={`grid h-10 w-10 place-items-center rounded-xl ${s.c}`}><s.i size={20}/></div><div className="mt-4 text-3xl font-bold">{s.v}</div><div className="mt-1 text-sm text-slate-500">{s.t}</div></div>)}</div>
+ <div className="rounded-2xl border border-slate-200 bg-white shadow-soft"><div className="flex items-center justify-between border-b border-slate-100 p-5"><div><h3 className="font-bold">Requests needing attention</h3><p className="mt-1 text-xs text-slate-400">Tasks assigned to your staff account</p></div><Link to="/complaints" className="flex items-center gap-1 text-sm font-semibold text-blue-600">All complaints <ArrowRight size={15}/></Link></div>{items.length?<div className="divide-y divide-slate-100">{items.map(c=><Link to={`/complaints/${c.id}`} key={c.id} className="flex items-center gap-3 p-5 transition hover:bg-slate-50"><div className="grid h-10 w-10 place-items-center rounded-xl bg-slate-100 text-slate-500"><Wrench size={18}/></div><div className="min-w-0 flex-1"><span className="block truncate text-sm font-semibold text-blue-700">{c.title}</span><div className="mt-1 text-xs text-slate-400">{c.id} · {c.resident} · {c.flat} · {c.category} · Priority: {c.priority}</div><p className="mt-2 line-clamp-3 text-sm text-slate-500">{c.description}</p></div><StatusBadge status={c.status}/></Link>)}</div>:<div className="p-10 text-center"><p className="font-semibold">No open requests</p><p className="mt-1 text-sm text-slate-500">Tasks assigned to your staff account will appear here.</p></div>}</div>
+ </div>;
+}

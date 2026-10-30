@@ -1,0 +1,18 @@
+import express from 'express';
+import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import cors from 'cors';
+import { corsOptions } from './config/cors.js';
+import { basicRateLimit } from './middleware/rateLimit.middleware.js';
+import { notFound, errorHandler } from './middleware/error.middleware.js';
+import authRoutes from './routes/auth.routes.js';
+import userRoutes from './routes/user.routes.js';
+import complaintRoutes from './routes/complaint.routes.js';
+import staffRoutes from './routes/staff.routes.js';
+import notificationRoutes from './routes/notification.routes.js';
+import adminRoutes from './routes/admin.routes.js';
+const app=express(); app.use(helmet({crossOriginResourcePolicy:{policy:'cross-origin'}})); app.use(cors(corsOptions)); app.options('*',cors(corsOptions)); app.use(express.json({limit:'12mb'})); app.use(express.urlencoded({extended:true,limit:'12mb'})); app.use(cookieParser()); app.use(morgan('dev')); app.use(basicRateLimit());
+app.get('/api/health',(req,res)=>res.json({success:true,message:'SocietyFix API is running',storage:'persistent-file',databaseConnected:false}));
+app.use('/api/v1/auth',authRoutes); app.use('/api/v1/users',userRoutes); app.use('/api/v1/complaints',complaintRoutes); app.use('/api/v1/staff',staffRoutes); app.use('/api/v1/notifications',notificationRoutes); app.use('/api/v1/admin',adminRoutes);
+app.use(notFound); app.use(errorHandler); export default app;

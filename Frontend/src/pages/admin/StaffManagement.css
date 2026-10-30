@@ -1,0 +1,58 @@
+/* Page-specific styles live beside the page logic. Tailwind utilities remain
+   in the JSX for layout and the rest of the visual design. */
+.staff-add-form {
+  animation: staff-form-enter 180ms ease-out;
+}
+
+.staff-form-field label {
+  color: #334155;
+}
+
+.staff-form-input {
+  min-height: 42px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.staff-form-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgb(59 130 246 / 12%);
+}
+
+.staff-password-note {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #f8fafc;
+  line-height: 1.5;
+}
+
+.staff-save-button,
+.staff-cancel-button {
+  transition: background-color 150ms ease, border-color 150ms ease, transform 150ms ease;
+}
+
+.staff-save-button:hover,
+.staff-cancel-button:hover {
+  transform: translateY(-1px);
+}
+
+.staff-cancel-button:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+@keyframes staff-form-enter {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .staff-add-form,
+  .staff-form-input,
+  .staff-save-button,
+  .staff-cancel-button {
+    animation: none;
+    transition: none;
+  }
+}
